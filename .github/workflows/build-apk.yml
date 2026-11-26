@@ -44,7 +44,7 @@ jobs:
           PROJECT_DIR=$(dirname "$SETTINGS")
           echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
 
- - name: Build APK
+      - name: Build APK
         run: |
           sed -i 's/VERSION_1_8/VERSION_17/g' "$PROJECT_DIR/app/build.gradle"
           gradle -p "$PROJECT_DIR" assembleDebug
