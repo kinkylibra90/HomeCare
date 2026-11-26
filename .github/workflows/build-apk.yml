@@ -1,19 +1,17 @@
 
+
 name: Build HomeCare APK
 
 on:
   workflow_dispatch:
   push:
-    paths:
-      - 'HomeCare-Android-Source.zip'
-      - '.github/workflows/build-apk.yml'
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Get repository files
+      - name: Check out source
         uses: actions/checkout@v4
 
       - name: Set up Java
@@ -27,55 +25,16 @@ jobs:
         with:
           gradle-version: '8.7'
 
-      - name: Unpack HomeCare project
-        run: |
-          ZIP=$(find . -maxdepth 1 -name '*.zip' -print -quit)
-          if [ -z "$ZIP" ]; then
-            echo "HomeCare ZIP file not found"
-            exit 1
-          fi
-          mkdir -p build-source
-          unzip -q "$ZIP" -d build-source
-          SETTINGS=$(find build-source -name settings.gradle -print -quit)
-          if [ -z "$SETTINGS" ]; then
-            echo "settings.gradle not found"
-            exit 1
-          fi
-          PROJECT_DIR=$(dirname "$SETTINGS")
-          echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
-
-
-      - name: Build APK
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-
-          p = Path("build-source/app/build.gradle")
-          s = p.read_text()
-
-          if "android {" not in s:
-              raise SystemExit("Android configuration not found")
-
-          fix = """
-              compileOptions {
-                  sourceCompatibility JavaVersion.VERSION_17
-                  targetCompatibility JavaVersion.VERSION_17
-              }
-              kotlinOptions {
-                  jvmTarget = '17'
-              }
-          """
-
-          s = s.replace("android {", "android {" + fix, 1)
-          p.write_text(s)
-          PY
-
-          gradle -p "$PROJECT_DIR" assembleDebug
-
+      - name: Build debug APK
+        run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: HomeCare-APK
+          name: HomeCare-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
+
           path: build-source/**/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
