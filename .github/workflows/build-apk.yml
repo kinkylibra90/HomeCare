@@ -44,10 +44,34 @@ jobs:
           PROJECT_DIR=$(dirname "$SETTINGS")
           echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
 
+
       - name: Build APK
         run: |
-          sed -i 's/VERSION_1_8/VERSION_17/g' "$PROJECT_DIR/app/build.gradle"
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path("build-source/app/build.gradle")
+          s = p.read_text()
+
+          if "android {" not in s:
+              raise SystemExit("Android configuration not found")
+
+          fix = """
+              compileOptions {
+                  sourceCompatibility JavaVersion.VERSION_17
+                  targetCompatibility JavaVersion.VERSION_17
+              }
+              kotlinOptions {
+                  jvmTarget = '17'
+              }
+          """
+
+          s = s.replace("android {", "android {" + fix, 1)
+          p.write_text(s)
+          PY
+
           gradle -p "$PROJECT_DIR" assembleDebug
+
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
