@@ -4,235 +4,103 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#101827">
-<title>HomeCare — Maintenance Manager v2</title>
+<title>HomeCare 2.0</title>
 <style>
-:root{--bg:#0b1220;--panel:#131e2e;--panel2:#19263a;--line:#29384d;--text:#edf3fb;--muted:#9aabc0;--accent:#71d5b0;--amber:#f4c46a;--red:#ff8585;--blue:#8db8ff}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#101c2d,#0b1220 55%);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
-.wrap{max-width:760px;margin:auto;padding:20px 16px 48px}.top{display:flex;justify-content:space-between;align-items:center;margin:8px 0 22px}.brand{display:flex;gap:11px;align-items:center}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#75dfbd,#3d9d91);display:grid;place-items:center;color:#09221f;font-size:22px;font-weight:800}.brand h1{font-size:18px;margin:0}.brand small{color:var(--muted)}.pill{font-size:12px;color:var(--accent);border:1px solid #315e58;background:#16332f;padding:5px 9px;border-radius:99px}
-h2{font-size:21px;margin:0 0 5px}.sub{color:var(--muted);margin:0 0 18px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.stat,.panel,.task{background:rgba(19,30,46,.94);border:1px solid var(--line);border-radius:17px}.stat{padding:14px}.stat b{display:block;font-size:25px}.stat span{font-size:12px;color:var(--muted)}.panel{padding:17px;margin:14px 0}.panel h3{font-size:15px;margin:0 0 12px}.inputrow{display:flex;gap:8px}.inputrow input{flex:1;min-width:0}.field{width:100%;background:#0d1726;border:1px solid #33445c;color:var(--text);border-radius:11px;padding:12px 13px;font:inherit;outline:none}.field:focus{border-color:var(--accent);box-shadow:0 0 0 3px #71d5b022}button{border:0;border-radius:11px;padding:11px 14px;font:600 14px system-ui;cursor:pointer}.primary{background:var(--accent);color:#09221f}.secondary{background:#24354c;color:var(--text);border:1px solid #3a4c65}.iconbtn{background:#24354c;color:var(--text);padding:10px 12px}.hint{font-size:12px;color:var(--muted);margin:9px 0 0}.formgrid{display:grid;grid-template-columns:1fr 110px 115px;gap:8px}.formgrid .wide{grid-column:1/-1}.tasks{display:grid;gap:10px}.task{padding:14px;display:flex;gap:12px;align-items:flex-start}.taskmain{flex:1;min-width:0}.tasktitle{font-weight:650;font-size:15px}.meta{font-size:12px;color:var(--muted);margin-top:4px}.due{font-size:12px;margin-top:8px;color:var(--accent)}.due.late{color:var(--red)}.due.soon{color:var(--amber)}.taskactions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.taskactions button{font-size:12px;padding:8px 9px}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed #3a4a60;border-radius:14px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:23px 2px 10px}.sectionhead h3{margin:0;font-size:16px}.tag{font-size:11px;padding:4px 7px;border-radius:99px;background:#24354c;color:var(--muted)}.notice{font-size:13px;color:#c5d5e8;background:#1a2c40;border:1px solid #314a65;padding:11px 12px;border-radius:12px;margin-top:10px}.notice.good{border-color:#315e58;background:#15312d}.notice.warn{border-color:#705c36;background:#332a19}.hidden{display:none!important}.footer{color:var(--muted);font-size:11px;text-align:center;margin:25px 0 0}.modalback{position:fixed;inset:0;background:#0009;display:grid;place-items:center;padding:16px;z-index:5}.modal{width:min(440px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px}.modal h3{margin:0 0 14px}.modal label,.formlabel{display:block;color:var(--muted);font-size:12px;margin:10px 0 5px}.modalfoot{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
-@media(max-width:520px){.wrap{padding:15px 12px 36px}.formgrid{grid-template-columns:1fr 1fr}.formgrid .name{grid-column:1/-1}.stats{gap:7px}.stat{padding:11px}.stat b{font-size:22px}.task{padding:12px}.taskactions{flex-direction:column}}
+:root{color-scheme:dark;--bg:#0b1220;--panel:#131e2e;--panel2:#19263a;--line:#29384d;--text:#edf3fb;--muted:#9aabc0;--accent:#71d5b0;--accentText:#09221f;--amber:#f4c46a;--red:#ff8585;--blue:#8db8ff;--shadow:0 12px 30px #0002}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh;transition:background .2s,color .2s}
+body[data-theme="light"]{color-scheme:light;--bg:#f3f6fa;--panel:#fff;--panel2:#edf2f7;--line:#dbe3ec;--text:#172033;--muted:#64748b;--accent:#0f8b78;--accentText:#fff;--amber:#a96b00;--red:#c43d4b;--blue:#2863b8;--shadow:0 8px 24px #1b2c4012}
+body[data-theme="ocean"]{--bg:#071d2b;--panel:#0d2a3a;--panel2:#12364a;--line:#245064;--text:#e8f6fc;--muted:#a5c8d9;--accent:#38bdf8;--accentText:#052333}
+body[data-theme="forest"]{--bg:#14251d;--panel:#1c3327;--panel2:#263f32;--line:#365644;--text:#eef8f0;--muted:#b4d2be;--accent:#86efac;--accentText:#10271a}
+body[data-theme="sunset"]{--bg:#29202b;--panel:#392b38;--panel2:#49313b;--line:#634650;--text:#fff2ed;--muted:#e4c3b8;--accent:#fdba74;--accentText:#351b10}
+body[data-theme="graphite"]{--bg:#20242b;--panel:#2a303a;--panel2:#343a48;--line:#454d5d;--text:#f2f3f7;--muted:#c5c8d0;--accent:#c4b5fd;--accentText:#211b36}
+.wrap{max-width:850px;margin:auto;padding:18px 15px 110px}.top{display:flex;justify-content:space-between;align-items:center;margin:6px 0 18px}.brand{display:flex;gap:11px;align-items:center}.logo{width:42px;height:42px;border-radius:14px;background:var(--accent);display:grid;place-items:center;color:var(--accentText);font-size:23px;font-weight:900}.brand h1{font-size:19px;margin:0}.brand small{color:var(--muted)}.pill,.tag{font-size:11px;padding:5px 9px;border-radius:99px;background:var(--panel2);color:var(--muted);border:1px solid var(--line)}
+h2{font-size:23px;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 18px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:17px 0}.stat,.panel,.task,.equipment{background:var(--panel);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow)}.stat{padding:13px}.stat b{display:block;font-size:25px}.stat span{font-size:12px;color:var(--muted)}.panel{padding:16px;margin:13px 0}.panel h3{font-size:15px;margin:0 0 12px}.field{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:11px;padding:12px;font:inherit;outline:none}.field:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}button{border:0;border-radius:11px;padding:10px 13px;font:600 13px system-ui;cursor:pointer}.primary{background:var(--accent);color:var(--accentText)}.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.danger{background:transparent;color:var(--red);border:1px solid var(--line)}.inputrow{display:flex;gap:8px}.inputrow input{flex:1;min-width:0}.formgrid{display:grid;grid-template-columns:1fr 110px 115px;gap:8px}.wide{grid-column:1/-1}.hint,.muted{font-size:12px;color:var(--muted)}.hint{margin:9px 0 0}.notice{font-size:13px;color:var(--text);background:var(--panel2);border:1px solid var(--line);padding:11px;border-radius:12px;margin-top:10px}.notice.good{border-color:var(--accent)}.notice.warn{border-color:var(--amber)}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:22px 2px 10px}.sectionhead h3{margin:0;font-size:16px}.tasks,.equipmentGrid{display:grid;gap:10px}.task,.equipment{padding:14px;display:flex;gap:12px;align-items:flex-start}.taskmain{flex:1;min-width:0}.tasktitle{font-weight:700}.meta{font-size:12px;color:var(--muted);margin-top:4px}.due{font-size:12px;margin-top:8px;color:var(--accent)}.due.late{color:var(--red)}.due.soon{color:var(--amber)}.actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.actions button{font-size:12px;padding:8px 9px}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}.hidden{display:none!important}.nav{position:fixed;bottom:0;left:0;right:0;z-index:4;background:color-mix(in srgb,var(--panel) 94%,transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px max(8px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom));max-width:850px;margin:auto}.nav button{background:transparent;color:var(--muted);padding:8px 2px;font-size:11px}.nav button.active{color:var(--accent);background:var(--panel2)}.nav .ico{display:block;font-size:18px;margin-bottom:2px}.view{display:none}.view.active{display:block}.equipment{display:block}.equipTop{display:flex;justify-content:space-between;gap:10px}.equipName{font-weight:700}.equipIcon{font-size:24px}.equipmentDetails{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:10px}.equipmentDetails div{font-size:12px;color:var(--muted)}.modalback{position:fixed;inset:0;background:#0009;display:grid;place-items:center;padding:16px;z-index:8}.modal{width:min(500px,100%);max-height:90vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px}.modal h3{margin:0 0 12px}.modal label{display:block;color:var(--muted);font-size:12px;margin:10px 0 5px}.modalfoot{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}.themeGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.themeChoice{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 6px;border-radius:12px;text-align:left}.themeChoice.selected{outline:2px solid var(--accent)}.swatch{height:25px;border-radius:7px;margin-bottom:7px}.footer{color:var(--muted);font-size:11px;text-align:center;margin:24px 0}
+@media(max-width:520px){.wrap{padding:14px 12px 105px}.formgrid{grid-template-columns:1fr 1fr}.formgrid .name{grid-column:1/-1}.stats{gap:6px}.stat{padding:10px}.stat b{font-size:22px}.task{padding:12px}.actions{flex-direction:column}.themeGrid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
-<body>
+<body data-theme="dark">
 <div class="wrap">
-  <header class="top">
-    <div class="brand"><div class="logo">⌂</div><div><h1>HomeCare</h1><small>Your home's maintenance memory</small></div></div>
-    <span class="pill">PRIVATE · ON THIS DEVICE</span>
-  </header>
-  <h2>Good to see you.</h2><p class="sub" id="todayline">Here's what's happening around your home.</p>
-  <div class="stats">
-    <div class="stat"><b id="duecount">0</b><span>Due / overdue</span></div>
-    <div class="stat"><b id="sooncount">0</b><span>Due in 30 days</span></div>
-    <div class="stat"><b id="totalcount">0</b><span>Active tasks</span></div>
-  </div>
-
-  <section class="panel">
-    <h3>✦ Tell HomeCare what you did</h3>
-    <div class="inputrow">
-      <input id="command" class="field" placeholder='“I changed the furnace filter today”' autocomplete="off">
-      <button id="mic" class="iconbtn" title="Speak">🎙</button>
-      <button id="record" class="primary">Record</button>
-    </div>
-    <p class="hint">Try “Furnace filter changed”, “I replaced the filter”, or “I cleaned the gutters”. We'll match an existing task or help you create one.</p>
-    <div id="feedback" class="notice hidden" aria-live="polite"></div>
-  </section>
-
-  <section class="panel">
-    <h3>＋ Add a maintenance task</h3>
-    <div class="formgrid">
-      <input id="newname" class="field name" placeholder="Task name (e.g. Furnace filter)">
-      <input id="interval" class="field" type="number" min="1" value="90" aria-label="Interval amount">
-      <select id="unit" class="field" aria-label="Interval unit"><option value="days">Days</option><option value="weeks">Weeks</option><option value="months">Months</option><option value="years">Years</option></select>
-      <input id="category" class="field wide" placeholder="Category (optional, e.g. HVAC)">
-      <button id="add" class="primary wide">Add task</button>
-    </div>
-    <p class="hint">You can change the interval whenever you need. The next due date is calculated from the last completed date.</p>
-  </section>
-
-  <section class="panel">
-    <h3>🔔 Reminder preferences</h3>
-    <div class="formgrid">
-      <label class="wide" style="display:flex;align-items:center;gap:9px;color:var(--text);font-size:14px">
-        <input type="checkbox" id="remindersEnabled" checked> Enable maintenance reminders
-      </label>
-      <div><label class="formlabel" for="advanceDays">Advance reminder</label>
-        <select id="advanceDays" class="field">
-          <option value="1">1 day before</option><option value="3">3 days before</option>
-          <option value="7" selected>7 days before</option><option value="14">14 days before</option>
-          <option value="30">30 days before</option><option value="0">No advance reminder</option>
-        </select>
-      </div>
-      <div><label class="formlabel" for="reminderTime">Preferred time</label><input id="reminderTime" class="field" type="time" value="09:00"></div>
-      <div class="wide"><label style="display:flex;align-items:center;gap:9px;color:var(--text);font-size:14px"><input type="checkbox" id="overdueEnabled" checked> One overdue follow-up (7 days after due date)</label></div>
-      <div class="wide"><label style="display:flex;align-items:center;gap:9px;color:var(--text);font-size:14px"><input type="checkbox" id="quietEnabled" checked> Quiet hours: 9 PM–8 AM</label></div>
-      <button id="saveReminders" class="primary wide">Save reminder settings</button>
-      <button id="enableNotifications" class="secondary wide">Enable phone notifications</button>
-    </div>
-    <p class="hint" id="notificationStatus">Reminders are checked when HomeCare is open. Allow notifications to receive browser alerts.</p>
-    <div class="notice">To avoid notification fatigue, each task gets at most one advance reminder, one due-day reminder, and one overdue follow-up per maintenance cycle. Completing a task resets that cycle.</div>
-  </section>
-
-  <div class="sectionhead"><h3>Maintenance schedule</h3><span class="tag" id="tasktag">0 tasks</span></div>
-  <div id="tasks" class="tasks"></div>
-  <div class="sectionhead"><h3>Recently completed</h3><span class="tag">History</span></div>
-  <div id="history" class="tasks"></div>
-  <p class="footer">Your tasks and reminder preferences are saved in this browser on this device. Export a backup periodically.</p>
-  <div style="display:flex;justify-content:center;gap:8px;margin-top:12px">
-    <button class="secondary" id="export">Export backup</button><button class="secondary" id="importbtn">Import backup</button><button class="secondary" id="clear">Settings / reset</button>
-    <input type="file" id="importfile" accept="application/json" class="hidden">
-  </div>
+<header class="top"><div class="brand"><div class="logo">⌂</div><div><h1>HomeCare</h1><small>Your home's maintenance memory</small></div></div><span class="pill">ON THIS DEVICE</span></header>
+<section id="homeView" class="view active">
+<h2>Good to see you.</h2><p class="sub" id="todayline">Your home maintenance overview</p>
+<div class="stats"><div class="stat"><b id="duecount">0</b><span>Due / overdue</span></div><div class="stat"><b id="sooncount">0</b><span>Due in 30 days</span></div><div class="stat"><b id="totalcount">0</b><span>Active tasks</span></div></div>
+<div class="panel"><h3>✦ Quick completion</h3><div class="inputrow"><input id="command" class="field" placeholder="I changed the furnace filter today"><button id="mic" class="secondary">🎙</button><button id="record" class="primary">Record</button></div><p class="hint">HomeCare matches your words to an existing maintenance task. This is currently phrase matching, not cloud AI.</p><div id="feedback" class="notice hidden" aria-live="polite"></div></div>
+<div class="sectionhead"><h3>Coming up</h3><span class="tag" id="tasktag">0 tasks</span></div><div id="homeTasks" class="tasks"></div>
+<div class="sectionhead"><h3>Recently completed</h3><span class="tag">History</span></div><div id="history" class="tasks"></div>
+</section>
+<section id="maintenanceView" class="view">
+<h2>Maintenance</h2><p class="sub">Keep recurring work organized and predictable.</p>
+<div class="panel"><h3>Add a maintenance task</h3><div class="formgrid"><input id="newname" class="field name wide" placeholder="Task name (e.g. Furnace filter)"><input id="interval" class="field" type="number" min="1" value="90" aria-label="Interval"><select id="unit" class="field"><option value="days">Days</option><option value="weeks">Weeks</option><option value="months">Months</option><option value="years">Years</option></select><input id="category" class="field wide" placeholder="Category (optional)"><select id="taskEquipment" class="field wide"><option value="">No equipment linked</option></select><button id="add" class="primary wide">Add task</button></div><p class="hint">Next due date is calculated from the last completion date. You can edit that date any time.</p></div>
+<div class="sectionhead"><h3>Maintenance schedule</h3><span class="tag" id="allTaskTag">0 tasks</span></div><div id="tasks" class="tasks"></div>
+</section>
+<section id="equipmentView" class="view">
+<h2>Equipment</h2><p class="sub">A directory of the systems and appliances in your home.</p>
+<div class="panel"><h3>Add equipment</h3><div class="formgrid"><input id="equipName" class="field wide" placeholder="Name (e.g. Main furnace)"><select id="equipCategory" class="field"><option>HVAC</option><option>Appliance</option><option>Plumbing</option><option>Electrical</option><option>Garage</option><option>Other</option></select><input id="equipMake" class="field" placeholder="Manufacturer"><input id="equipModel" class="field" placeholder="Model number"><input id="equipSerial" class="field" placeholder="Serial number"><input id="equipLocation" class="field" placeholder="Location in home"><input id="equipInstall" class="field" type="date" aria-label="Installation date"><input id="equipWarranty" class="field" type="date" aria-label="Warranty expiration"><button id="addEquipment" class="primary wide">Save equipment</button></div></div>
+<div class="sectionhead"><h3>Your equipment</h3><span class="tag" id="equipmentCount">0 items</span></div><div id="equipmentList" class="equipmentGrid"></div>
+</section>
+<section id="settingsView" class="view">
+<h2>Settings</h2><p class="sub">Make HomeCare work the way you want.</p>
+<div class="panel"><h3>Appearance</h3><p class="hint">Choose a color theme. Your choice is saved on this device.</p><div class="themeGrid" id="themeGrid">
+<button class="themeChoice" data-theme-choice="dark"><div class="swatch" style="background:linear-gradient(90deg,#0b1220 50%,#71d5b0 50%)"></div>Dark</button>
+<button class="themeChoice" data-theme-choice="light"><div class="swatch" style="background:linear-gradient(90deg,#f3f6fa 50%,#0f8b78 50%)"></div>Light</button>
+<button class="themeChoice" data-theme-choice="ocean"><div class="swatch" style="background:linear-gradient(90deg,#071d2b 50%,#38bdf8 50%)"></div>Ocean</button>
+<button class="themeChoice" data-theme-choice="forest"><div class="swatch" style="background:linear-gradient(90deg,#14251d 50%,#86efac 50%)"></div>Forest</button>
+<button class="themeChoice" data-theme-choice="sunset"><div class="swatch" style="background:linear-gradient(90deg,#29202b 50%,#fdba74 50%)"></div>Sunset</button>
+<button class="themeChoice" data-theme-choice="graphite"><div class="swatch" style="background:linear-gradient(90deg,#20242b 50%,#c4b5fd 50%)"></div>Graphite</button>
+</div><label style="display:flex;gap:9px;align-items:center;margin-top:14px"><input type="checkbox" id="systemTheme"> Follow Android system appearance (when supported)</label></div>
+<div class="panel"><h3>Maintenance reminders</h3><label style="display:flex;gap:9px;align-items:center"><input type="checkbox" id="remindersEnabled" checked> Enable reminders</label><div class="formgrid" style="margin-top:10px"><div><label>Advance reminder</label><select id="advanceDays" class="field"><option value="1">1 day before</option><option value="3">3 days before</option><option value="7">7 days before</option><option value="14">14 days before</option><option value="30">30 days before</option><option value="0">Off</option></select></div><div><label>Reminder time</label><input id="reminderTime" class="field" type="time" value="09:00"></div><div class="wide"><label style="display:flex;gap:9px;align-items:center"><input type="checkbox" id="overdueEnabled" checked> One overdue follow-up after 7 days</label></div><div class="wide"><label style="display:flex;gap:9px;align-items:center"><input type="checkbox" id="quietEnabled" checked> Quiet hours (9 PM–8 AM)</label></div><button id="saveReminders" class="primary wide">Save reminder settings</button><button id="enableNotifications" class="secondary wide">Allow notifications</button></div><p class="hint" id="notificationStatus">Web notifications are checked while HomeCare is open. Native background scheduling is a later Android implementation step.</p><div class="notice">No daily nagging: one advance alert, one due-day alert, and one optional overdue follow-up per task cycle. Completing a task resets its reminder cycle.</div></div>
+<div class="panel"><h3>Backup and restore</h3><div class="inputrow"><button class="secondary" id="export">Export backup</button><button class="secondary" id="importbtn">Import backup</button><input type="file" id="importfile" accept="application/json" class="hidden"></div><p class="hint">A backup includes tasks, equipment, links, history and preferences. Keep a copy somewhere safe.</p></div>
+<div class="panel"><h3>About this build</h3><p class="hint">HomeCare 2.0 foundation preview. Data remains local to this app/browser. Web reminders are not guaranteed when the app is closed. Native Android notifications and reboot recovery still need to be added and tested.</p></div>
+</section>
+<p class="footer">HomeCare · Your home's maintenance memory</p>
 </div>
-
-<div id="modalback" class="modalback hidden">
- <div class="modal">
-  <h3 id="modalTitle">Edit task</h3>
-  <label>Task name</label><input id="editname" class="field">
-  <label>Category</label><input id="editcat" class="field">
-  <label>Repeat every</label><div class="formgrid"><input id="editinterval" class="field" type="number" min="1"><select id="editunit" class="field"><option value="days">Days</option><option value="weeks">Weeks</option><option value="months">Months</option><option value="years">Years</option></select></div>
-  <label>Last completed date</label><input id="editdate" class="field" type="date">
-  <div class="modalfoot"><button class="secondary" id="cancelEdit">Cancel</button><button class="primary" id="saveEdit">Save changes</button></div>
- </div>
-</div>
+<nav class="nav"><button class="active" data-view="home"><span class="ico">⌂</span>Home</button><button data-view="maintenance"><span class="ico">✓</span>Maintenance</button><button data-view="equipment"><span class="ico">⚙</span>Equipment</button><button data-view="settings"><span class="ico">☷</span>Settings</button></nav>
+<div id="modalback" class="modalback hidden"><div class="modal"><h3 id="modalTitle">Edit</h3><div id="modalFields"></div><div class="modalfoot"><button class="secondary" id="modalCancel">Cancel</button><button class="primary" id="modalSave">Save</button></div></div></div>
 <script>
-(function(){
-const $=id=>document.getElementById(id);
-const KEY='homecare_tasks_v1';
-let tasks=[], editing=null;
-const DEFAULT_PREFS={enabled:true,advanceDays:7,overdue:true,quiet:true,time:'09:00'};
-let prefs={...DEFAULT_PREFS};
-const PREFKEY='homecare_reminder_prefs_v1';
-const today=()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())};
-const iso=d=>{const x=new Date(d);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`};
-const parseDate=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+(()=> {
+const $=id=>document.getElementById(id), TASK_KEY='homecare_tasks_v1', PREF_KEY='homecare_reminder_prefs_v1', EQUIP_KEY='homecare_equipment_v1', THEME_KEY='homecare_theme_v1', SENT_KEY='homecare_sent_notifications_v1';
+let tasks=[],equipment=[],prefs={enabled:true,advanceDays:7,overdue:true,quiet:true,time:'09:00'},theme='dark',editingTask=null,editingEquipment=null,modalAction=null;
+const today=()=>{let d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())};
+const iso=d=>{let x=new Date(d);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`};
+const parseDate=s=>{let [y,m,d]=String(s).split('-').map(Number);return new Date(y,m-1,d)};
+const addInterval=(date,n,u)=>{let d=new Date(date);if(u==='days')d.setDate(d.getDate()+n);if(u==='weeks')d.setDate(d.getDate()+7*n);if(u==='months'){let day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+n);d.setDate(Math.min(day,new Date(d.getFullYear(),d.getMonth()+1,0).getDate()))}if(u==='years'){let m=d.getMonth(),day=d.getDate();d.setDate(1);d.setFullYear(d.getFullYear()+n);d.setMonth(m);d.setDate(Math.min(day,new Date(d.getFullYear(),m+1,0).getDate()))}return d};
+const dueDate=t=>iso(addInterval(parseDate(t.lastDone),Number(t.interval),t.unit));
+const daysUntil=s=>Math.round((parseDate(s)-today())/86400000);
 const fmt=s=>parseDate(s).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
-function addInterval(date,n,unit){let d=new Date(date);if(unit==='days')d.setDate(d.getDate()+n);if(unit==='weeks')d.setDate(d.getDate()+n*7);if(unit==='months'){let day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+n);let last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();d.setDate(Math.min(day,last));}if(unit==='years'){let m=d.getMonth(),day=d.getDate();d.setDate(1);d.setFullYear(d.getFullYear()+n);d.setMonth(m);let last=new Date(d.getFullYear(),m+1,0).getDate();d.setDate(Math.min(day,last));}return d}
-function load(){
- try{tasks=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){tasks=[]}
- try{prefs={...DEFAULT_PREFS,...JSON.parse(localStorage.getItem(PREFKEY)||'{}')}}catch(e){prefs={...DEFAULT_PREFS}}
-}
-function save(){localStorage.setItem(KEY,JSON.stringify(tasks))}
-function savePrefs(){localStorage.setItem(PREFKEY,JSON.stringify(prefs))}
-function syncPrefsUI(){
- $('remindersEnabled').checked=!!prefs.enabled;$('advanceDays').value=String(prefs.advanceDays);
- $('overdueEnabled').checked=!!prefs.overdue;$('quietEnabled').checked=!!prefs.quiet;$('reminderTime').value=prefs.time||'09:00';
- updateNotificationStatus();
-}
-function updateNotificationStatus(){
- const supported='Notification' in window;
- $('notificationStatus').textContent=!supported
- ?'This browser does not support web notifications. Your due dates will still appear in the app.'
- :Notification.permission==='granted'
- ?'Phone notifications are allowed. Alerts are checked while HomeCare is open.'
- :Notification.permission==='denied'
- ?'Notifications are blocked by your browser. You can change this in Chrome site settings.'
- :'Allow notifications to receive browser alerts while HomeCare is open.';
-}
-function notifyOnce(key,title,body){
- const sent=JSON.parse(localStorage.getItem('homecare_sent_notifications_v1')||'{}');
- if(sent[key])return;
- sent[key]=new Date().toISOString();localStorage.setItem('homecare_sent_notifications_v1',JSON.stringify(sent));
- if('Notification' in window && Notification.permission==='granted'){
-   try{new Notification(title,{body,tag:key,renotify:false})}catch(e){}
- }
-}
-function checkReminders(){
- if(!prefs.enabled)return;
- const now=new Date(),[hh,mm]=(prefs.time||'09:00').split(':').map(Number);
- if(prefs.quiet && (now.getHours()<8 || now.getHours()>=21))return;
- if(now.getHours()<hh || (now.getHours()===hh && now.getMinutes()<mm))return;
- for(const t of tasks.filter(x=>!x.archived)){
-   const due=dueDate(t),delta=daysUntil(due),cycle=t.lastDone+'_'+due;
-   if(Number(prefs.advanceDays)>0 && delta===Number(prefs.advanceDays))
-     notifyOnce(t.id+'_'+cycle+'_advance','HomeCare · Coming up',t.name+' is due in '+delta+' days.');
-   if(delta===0)
-     notifyOnce(t.id+'_'+cycle+'_due','HomeCare · Due today',t.name+' is due today.');
-   if(prefs.overdue && delta===-7)
-     notifyOnce(t.id+'_'+cycle+'_overdue','HomeCare · Overdue follow-up',t.name+' is 7 days overdue. Snooze or mark it complete in HomeCare.');
- }
-}
-function dueDate(t){return iso(addInterval(parseDate(t.lastDone),Number(t.interval),t.unit))}
-function daysUntil(s){return Math.round((parseDate(s)-today())/86400000)}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function render(){
- const active=tasks.filter(t=>!t.archived), completed=tasks.flatMap(t=>(t.history||[]).map(h=>({...h,name:t.name}))).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
- const due=active.filter(t=>daysUntil(dueDate(t))<=0).length,soon=active.filter(t=>daysUntil(dueDate(t))>0&&daysUntil(dueDate(t))<=30).length;
- $('duecount').textContent=due;$('sooncount').textContent=soon;$('totalcount').textContent=active.length;$('tasktag').textContent=active.length+' tasks';
- $('todayline').textContent=today().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})+' · Your home maintenance overview';
- const sorted=[...active].sort((a,b)=>dueDate(a).localeCompare(dueDate(b)));
- $('tasks').innerHTML=sorted.length?sorted.map(t=>{let n=daysUntil(dueDate(t)),cl=n<0?'late':n<=30?'soon':'',label=n<0?`${Math.abs(n)} days overdue`:n===0?'Due today':`Due in ${n} days`;return `<article class="task"><div class="taskmain"><div class="tasktitle">${esc(t.name)}</div><div class="meta">${esc(t.category||'General')} · Every ${t.interval} ${t.unit} · Last done ${fmt(t.lastDone)}</div><div class="due ${cl}">Next: ${fmt(dueDate(t))} · ${label}</div></div><div class="taskactions"><button class="primary" data-done="${t.id}">✓ Done</button><button class="secondary" data-edit="${t.id}">Edit</button><button class="secondary" data-del="${t.id}">×</button></div></article>`}).join(''):'<div class="empty">No maintenance tasks yet. Add your first task above.</div>';
- $('history').innerHTML=completed.length?completed.map(h=>`<article class="task"><div class="taskmain"><div class="tasktitle">${esc(h.name)}</div><div class="meta">Completed ${fmt(h.date)}${h.note?' · '+esc(h.note):''}</div></div></article>`).join(''):'<div class="empty">Completed maintenance will appear here.</div>';
-}
-function feedback(msg,type='good'){const el=$('feedback');el.textContent=msg;el.className='notice '+type}
-function norm(s){return s.toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim()}
-function cleanTaskName(s){
- let x=s.trim().replace(/^(i\s+)?(just\s+)?(changed|replaced|installed|cleaned|inspected|serviced|flushed|tested|lubricated|completed|did)\s+(the\s+)?/i,'');
- x=x.replace(/\s+(today|just now|this morning|yesterday)$/i,'').replace(/^(the\s+)/i,'').trim();
- x=x.replace(/\s+(was|is)\s+(changed|replaced|cleaned|serviced)$/i,'').trim();
- if(!x)return s.trim();
- return x.charAt(0).toUpperCase()+x.slice(1);
-}
-function findTask(text){
- const q=norm(text);
- let best=null,bestScore=0;
- for(const t of tasks.filter(x=>!x.archived)){
-  const n=norm(t.name), words=n.split(' ').filter(w=>w.length>2);
-  let score=0;
-  if(q.includes(n))score=100+n.length;
-  else if(n.includes(q))score=60;
-  else {for(const w of words)if(q.includes(w))score+=w.length>5?3:1;}
-  if(score>bestScore){best=t;bestScore=score;}
- }
- return bestScore>=3?best:null;
-}
-function recordCommand(raw){
- const text=raw.trim();if(!text){feedback('Type or say what you completed first.','warn');return}
- let task=findTask(text);
- if(!task){
-  const name=cleanTaskName(text);
-  task={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name:name,category:'Uncategorized',interval:90,unit:'days',lastDone:iso(today()),history:[],created:iso(today())};
-  tasks.push(task);save();render();
-  feedback(`I created “${name}” and recorded it as completed today. I used a 90-day starting interval. Tap Edit to change the interval or category.`, 'warn');
- }else{
-  const date=iso(today());task.history=task.history||[];task.history.unshift({date,note:text});task.lastDone=date;save();render();
-  feedback(`Recorded: ${task.name} was completed today (${fmt(date)}). Next due: ${fmt(dueDate(task))}.`);
- }
- $('command').value='';
-}
-$('record').addEventListener('click',()=>recordCommand($('command').value));
-$('command').addEventListener('keydown',e=>{if(e.key==='Enter')recordCommand($('command').value)});
-$('add').addEventListener('click',()=>{
- const name=$('newname').value.trim(),n=Number($('interval').value),unit=$('unit').value;
- if(!name||!Number.isFinite(n)||n<1){feedback('Enter a task name and a valid interval.','warn');return}
- if(tasks.some(t=>norm(t.name)===norm(name)&&!t.archived)){feedback('A task with that name already exists. Edit the existing task instead.','warn');return}
- tasks.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name,category:$('category').value.trim()||'General',interval:n,unit,lastDone:iso(today()),history:[],created:iso(today())});
- save();render();$('newname').value='';$('category').value='';feedback(`Added “${name}”. Its first interval starts today. If you last completed it earlier, edit the task's last-completed date.`);
-});
-function openEdit(id){const t=tasks.find(x=>x.id===id);if(!t)return;editing=id;$('editname').value=t.name;$('editcat').value=t.category||'';$('editinterval').value=t.interval;$('editunit').value=t.unit;$('editdate').value=t.lastDone;$('modalback').classList.remove('hidden')}
-$('tasks').addEventListener('click',e=>{
- const done=e.target.dataset.done,edit=e.target.dataset.edit,del=e.target.dataset.del;
- if(done){const t=tasks.find(x=>x.id===done);if(t){t.history=t.history||[];t.history.unshift({date:iso(today()),note:'Marked complete'});t.lastDone=iso(today());save();render();feedback(`Marked ${t.name} complete. Next due ${fmt(dueDate(t))}.`)}}
- if(edit)openEdit(edit);
- if(del){const t=tasks.find(x=>x.id===del);if(t&&confirm(`Delete “${t.name}” and its history?`)){tasks=tasks.filter(x=>x.id!==del);save();render()}}
-});
-$('cancelEdit').onclick=()=>$('modalback').classList.add('hidden');
-$('saveEdit').onclick=()=>{const t=tasks.find(x=>x.id===editing),n=Number($('editinterval').value),date=$('editdate').value;if(!t||!$('editname').value.trim()||n<1||!date){alert('Please enter a task name, valid interval, and last-completed date.');return}t.name=$('editname').value.trim();t.category=$('editcat').value.trim()||'General';t.interval=n;t.unit=$('editunit').value;t.lastDone=date;save();render();$('modalback').classList.add('hidden');feedback('Task updated. Next due date recalculated.')};
-$('export').onclick=()=>{const blob=new Blob([JSON.stringify({app:'HomeCare',version:1,tasks},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='homecare-backup.json';a.click();URL.revokeObjectURL(a.href)};
-$('importbtn').onclick=()=>$('importfile').click();
-$('importfile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());if(!Array.isArray(data.tasks))throw Error();if(confirm('Import will replace the tasks currently saved on this device. Continue?')){tasks=data.tasks;save();render();feedback('Backup imported successfully.')}}catch(err){alert('That file does not look like a valid HomeCare backup.')}e.target.value=''};
-$('clear').onclick=()=>{if(confirm('Reset HomeCare and delete all tasks and history on this device? Export a backup first if you want to keep them.')){tasks=[];save();render();feedback('All tasks cleared.')}};
-$('saveReminders').onclick=()=>{
- prefs={enabled:$('remindersEnabled').checked,advanceDays:Number($('advanceDays').value),overdue:$('overdueEnabled').checked,quiet:$('quietEnabled').checked,time:$('reminderTime').value||'09:00'};
- savePrefs();updateNotificationStatus();feedback('Reminder preferences saved. HomeCare will avoid repeating the same reminder for a maintenance cycle.');
-};
-$('enableNotifications').onclick=async()=>{
- if(!('Notification' in window)){feedback('This browser does not support notifications.','warn');return}
- try{const result=await Notification.requestPermission();updateNotificationStatus();feedback(result==='granted'?'Phone notifications enabled. Keep in mind: this prototype checks reminders while the app is open.':'Notifications were not enabled. You can still see due tasks in the app.',result==='granted'?'good':'warn')}catch(e){feedback('Could not request notification permission in this browser.','warn')}
-};
-$('mic').onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){feedback('Voice input is not supported in this browser. Use your keyboard microphone or type the update.','warn');return}const r=new SR();r.lang='en-US';r.interimResults=false;r.onstart=()=>feedback('Listening… say what you completed.');r.onresult=e=>{$('command').value=e.results[0][0].transcript;recordCommand($('command').value)};r.onerror=()=>feedback('Could not hear that. Try again or type your update.','warn');r.start()};
-load();syncPrefsUI();render();checkReminders();
-setInterval(checkReminders,60000);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkReminders()});
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random());
+function load(){try{tasks=JSON.parse(localStorage.getItem(TASK_KEY)||'[]')}catch{tasks=[]}try{equipment=JSON.parse(localStorage.getItem(EQUIP_KEY)||'[]')}catch{equipment=[]}try{prefs={...prefs,...JSON.parse(localStorage.getItem(PREF_KEY)||'{}')}}catch{}theme=localStorage.getItem(THEME_KEY)||'dark';tasks.forEach(t=>{t.history=t.history||[];t.equipmentId=t.equipmentId||''})}
+function save(){localStorage.setItem(TASK_KEY,JSON.stringify(tasks));localStorage.setItem(EQUIP_KEY,JSON.stringify(equipment))}
+function savePrefs(){localStorage.setItem(PREF_KEY,JSON.stringify(prefs))}
+function applyTheme(){document.body.dataset.theme=theme;localStorage.setItem(THEME_KEY,theme);document.querySelectorAll('[data-theme-choice]').forEach(b=>b.classList.toggle('selected',b.dataset.themeChoice===theme));document.querySelector('meta[name="theme-color"]').content=getComputedStyle(document.body).getPropertyValue('--bg').trim()}
+function setView(v){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===v+'View'));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.view===v));if(v==='equipment')renderEquipment();if(v==='maintenance')renderTasks()}
+function feedback(s,type='good'){$('feedback').textContent=s;$('feedback').className='notice '+type}
+function equipmentName(id){return equipment.find(e=>e.id===id)?.name||''}
+function taskCard(t){let delta=daysUntil(dueDate(t)),status=delta<0?`${Math.abs(delta)} days overdue`:delta===0?'Due today':`Due in ${delta} days`,cl=delta<0?'late':delta<=30?'soon':'';return `<article class="task"><div class="taskmain"><div class="tasktitle">${esc(t.name)}</div><div class="meta">${esc(t.category||'General')} · Every ${t.interval} ${esc(t.unit)}${t.equipmentId&&equipmentName(t.equipmentId)?' · '+esc(equipmentName(t.equipmentId)):''}</div><div class="meta">Last completed ${fmt(t.lastDone)}</div><div class="due ${cl}">Next: ${fmt(dueDate(t))} · ${status}</div></div><div class="actions"><button class="primary" data-done="${t.id}">✓ Done</button><button class="secondary" data-edit-task="${t.id}">Edit</button></div></article>`}
+function renderTasks(){let active=tasks.filter(t=>!t.archived).sort((a,b)=>dueDate(a).localeCompare(dueDate(b)));$('tasks').innerHTML=active.length?active.map(taskCard).join(''):'<div class="empty">No maintenance tasks yet. Add your first task above.</div>';$('homeTasks').innerHTML=active.slice(0,5).map(taskCard).join('')||'<div class="empty">Your maintenance schedule will appear here.</div>';$('tasktag').textContent=active.length+' tasks';$('allTaskTag').textContent=active.length+' tasks';$('totalcount').textContent=active.length;$('duecount').textContent=active.filter(t=>daysUntil(dueDate(t))<=0).length;$('sooncount').textContent=active.filter(t=>daysUntil(dueDate(t))>0&&daysUntil(dueDate(t))<=30).length;$('todayline').textContent=today().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})+' · Your home maintenance overview';let h=tasks.flatMap(t=>(t.history||[]).map(x=>({...x,name:t.name}))).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,6);$('history').innerHTML=h.map(x=>`<article class="task"><div><b>${esc(x.name)}</b><div class="meta">Completed ${fmt(x.date)}${x.note?' · '+esc(x.note):''}</div></div></article>`).join('')||'<div class="empty">Completed tasks will appear here.</div>';fillEquipmentSelect()}
+function fillEquipmentSelect(){let s=$('taskEquipment'),v=s.value;s.innerHTML='<option value="">No equipment linked</option>'+equipment.map(e=>`<option value="${e.id}">${esc(e.name)}</option>`).join('');if([...s.options].some(o=>o.value===v))s.value=v}
+function renderEquipment(){ $('equipmentCount').textContent=equipment.length+' items';$('equipmentList').innerHTML=equipment.length?equipment.map(e=>{let linked=tasks.filter(t=>t.equipmentId===e.id&&!t.archived);return `<article class="equipment"><div class="equipTop"><div><div class="equipName"><span class="equipIcon">⚙</span> ${esc(e.name)}</div><div class="meta">${esc(e.category||'Other')} · ${esc(e.make||'Manufacturer not entered')}</div></div><div class="actions"><button class="secondary" data-edit-equipment="${e.id}">Edit</button><button class="danger" data-delete-equipment="${e.id}">×</button></div></div><div class="equipmentDetails"><div>Model: ${esc(e.model||'—')}</div><div>Serial: ${esc(e.serial||'—')}</div><div>Location: ${esc(e.location||'—')}</div><div>Installed: ${e.install?fmt(e.install):'—'}</div><div>Warranty: ${e.warranty?fmt(e.warranty):'—'}</div><div>Linked tasks: ${linked.length}</div></div>${linked.length?'<div class="meta" style="margin-top:10px"><b>Maintenance</b><br>'+linked.map(t=>esc(t.name)+' · '+fmt(dueDate(t))).join('<br>')+'</div>':'<div class="meta" style="margin-top:10px">No maintenance tasks linked yet.</div>'}</article>`}).join(''):'<div class="empty">No equipment added yet. Add your furnace, water heater, appliances and other home systems.</div>';fillEquipmentSelect()}
+function addTask(){let name=$('newname').value.trim(),n=Number($('interval').value);if(!name||!Number.isFinite(n)||n<1){feedback('Enter a task name and a valid repeat interval.','warn');return}if(tasks.some(t=>t.name.toLowerCase()===name.toLowerCase()&&!t.archived)){feedback('A task with that name already exists. Edit the existing task instead.','warn');return}tasks.push({id:uid(),name,category:$('category').value.trim()||'General',interval:n,unit:$('unit').value,lastDone:iso(today()),history:[],created:iso(today()),equipmentId:$('taskEquipment').value||''});save();renderTasks();$('newname').value='';$('category').value='';feedback(`Added ${name}. Set its last-completed date if it was done earlier.`)}
+function completeTask(id,note='Marked complete'){let t=tasks.find(x=>x.id===id);if(!t)return;t.history=t.history||[];t.history.unshift({date:iso(today()),note});t.lastDone=iso(today());save();renderTasks();feedback(`${t.name} completed. Next due ${fmt(dueDate(t))}.`)}
+function openModal(title,fields,saveFn){$('modalTitle').textContent=title;$('modalFields').innerHTML=fields;$('modalback').classList.remove('hidden');modalAction=saveFn}
+function closeModal(){$('modalback').classList.add('hidden');modalAction=null}
+function editTask(id){let t=tasks.find(x=>x.id===id);if(!t)return;openModal('Edit maintenance task',`<label>Task name</label><input id="mName" class="field" value="${esc(t.name)}"><label>Category</label><input id="mCategory" class="field" value="${esc(t.category||'')}"><label>Repeat interval</label><div class="formgrid"><input id="mInterval" class="field" type="number" min="1" value="${t.interval}"><select id="mUnit" class="field">${['days','weeks','months','years'].map(u=>`<option ${t.unit===u?'selected':''}>${u}</option>`).join('')}</select></div><label>Last completed</label><input id="mDate" class="field" type="date" value="${t.lastDone}"><label>Linked equipment</label><select id="mEquipment" class="field"><option value="">No equipment linked</option>${equipment.map(e=>`<option value="${e.id}" ${t.equipmentId===e.id?'selected':''}>${esc(e.name)}</option>`).join('')}</select>`,()=>{let n=Number($('mInterval').value),date=$('mDate').value;if(!$('mName').value.trim()||n<1||!date){alert('Enter a name, valid interval and completion date.');return false}t.name=$('mName').value.trim();t.category=$('mCategory').value.trim()||'General';t.interval=n;t.unit=$('mUnit').value;t.lastDone=date;t.equipmentId=$('mEquipment').value;save();renderTasks();renderEquipment();return true})}
+function addEquipment(){let name=$('equipName').value.trim();if(!name){alert('Enter an equipment name.');return}equipment.push({id:uid(),name,category:$('equipCategory').value,make:$('equipMake').value.trim(),model:$('equipModel').value.trim(),serial:$('equipSerial').value.trim(),location:$('equipLocation').value.trim(),install:$('equipInstall').value,warranty:$('equipWarranty').value,notes:''});save();['equipName','equipMake','equipModel','equipSerial','equipLocation','equipInstall','equipWarranty'].forEach(id=>$(id).value='');renderEquipment();renderTasks()}
+function editEquipment(id){let e=equipment.find(x=>x.id===id);if(!e)return;openModal('Edit equipment',`<label>Name</label><input id="eName" class="field" value="${esc(e.name)}"><label>Category</label><select id="eCategory" class="field">${['HVAC','Appliance','Plumbing','Electrical','Garage','Other'].map(c=>`<option ${e.category===c?'selected':''}>${c}</option>`).join('')}</select><label>Manufacturer</label><input id="eMake" class="field" value="${esc(e.make)}"><label>Model</label><input id="eModel" class="field" value="${esc(e.model)}"><label>Serial number</label><input id="eSerial" class="field" value="${esc(e.serial)}"><label>Location</label><input id="eLocation" class="field" value="${esc(e.location)}"><label>Installation date</label><input id="eInstall" class="field" type="date" value="${e.install||''}"><label>Warranty expiration</label><input id="eWarranty" class="field" type="date" value="${e.warranty||''}">`,()=>{if(!$('eName').value.trim()){alert('Equipment needs a name.');return false}Object.assign(e,{name:$('eName').value.trim(),category:$('eCategory').value,make:$('eMake').value.trim(),model:$('eModel').value.trim(),serial:$('eSerial').value.trim(),location:$('eLocation').value.trim(),install:$('eInstall').value,warranty:$('eWarranty').value});save();renderEquipment();renderTasks();return true})}
+function recordCommand(raw){let q=raw.trim().toLowerCase();if(!q){feedback('Type what you completed first.','warn');return}let t=tasks.filter(x=>!x.archived).sort((a,b)=>b.name.length-a.name.length).find(x=>q.includes(x.name.toLowerCase())||x.name.toLowerCase().includes(q.replace(/^(i |just )?(changed|replaced|cleaned|serviced|inspected|flushed|tested|installed) (the )?/,'').replace(/ (today|yesterday)$/,'')));if(!t){feedback('I could not confidently match that to an existing task. Add the task first or choose it from Maintenance.', 'warn');return}completeTask(t.id,raw);$('command').value=''}
+function notifyOnce(key,title,body){let sent={};try{sent=JSON.parse(localStorage.getItem(SENT_KEY)||'{}')}catch{}if(sent[key])return;sent[key]=new Date().toISOString();localStorage.setItem(SENT_KEY,JSON.stringify(sent));if('Notification'in window&&Notification.permission==='granted')try{new Notification(title,{body,tag:key,renotify:false})}catch{}}
+function checkReminders(){if(!prefs.enabled)return;let now=new Date(),[hh,mm]=(prefs.time||'09:00').split(':').map(Number);if(prefs.quiet&&(now.getHours()<8||now.getHours()>=21))return;if(now.getHours()<hh||(now.getHours()===hh&&now.getMinutes()<mm))return;tasks.filter(t=>!t.archived).forEach(t=>{let due=dueDate(t),d=daysUntil(due),cycle=t.lastDone+'_'+due;if(Number(prefs.advanceDays)>0&&d===Number(prefs.advanceDays))notifyOnce(t.id+cycle+'advance','HomeCare · Coming up',t.name+' is due in '+d+' days.');if(d===0)notifyOnce(t.id+cycle+'due','HomeCare · Due today',t.name+' is due today.');if(prefs.overdue&&d===-7)notifyOnce(t.id+cycle+'overdue','HomeCare · Overdue follow-up',t.name+' is 7 days overdue.')})}
+$('add').onclick=addTask;$('addEquipment').onclick=addEquipment;$('record').onclick=()=>recordCommand($('command').value);$('command').onkeydown=e=>{if(e.key==='Enter')recordCommand($('command').value)};$('mic').onclick=()=>{let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){feedback('Voice recognition is unavailable here. You can type or use your keyboard microphone.','warn');return}let r=new SR();r.lang='en-US';r.onresult=e=>{$('command').value=e.results[0][0].transcript;recordCommand($('command').value)};r.start()};
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>setView(b.dataset.view));
+document.addEventListener('click',e=>{let d=e.target.dataset;if(d.done)completeTask(d.done);if(d['edit-task'])editTask(d['edit-task']);if(d['edit-equipment'])editEquipment(d['edit-equipment']);if(d['delete-equipment']){let id=d['delete-equipment'];if(confirm('Delete this equipment? Linked maintenance tasks will be kept but unlinked.')){equipment=equipment.filter(x=>x.id!==id);tasks.forEach(t=>{if(t.equipmentId===id)t.equipmentId='' });save();renderEquipment();renderTasks()}}});
+$('modalCancel').onclick=closeModal;$('modalSave').onclick=()=>{if(modalAction&&modalAction())closeModal()};
+document.querySelectorAll('[data-theme-choice]').forEach(b=>b.onclick=()=>{theme=b.dataset.themeChoice;applyTheme()});
+$('systemTheme').onchange=e=>{if(e.target.checked){let dark=matchMedia('(prefers-color-scheme: dark)').matches;theme=dark?'dark':'light';applyTheme()}};
+$('saveReminders').onclick=()=>{prefs={enabled:$('remindersEnabled').checked,advanceDays:Number($('advanceDays').value),overdue:$('overdueEnabled').checked,quiet:$('quietEnabled').checked,time:$('reminderTime').value||'09:00'};savePrefs();feedback('Reminder preferences saved. No daily nagging is enabled.','good')};
+$('enableNotifications').onclick=async()=>{if(!('Notification'in window)){alert('Notifications are not supported in this browser.');return}let p=await Notification.requestPermission();$('notificationStatus').textContent=p==='granted'?'Notifications allowed. This preview checks reminders while open; background alerts require the native Android scheduler.':'Notifications are not enabled.'};
+$('export').onclick=()=>{let data={app:'HomeCare',version:2,tasks,equipment,prefs,theme};let a=document.createElement('a'),url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.href=url;a.download='homecare-backup.json';a.click();URL.revokeObjectURL(url)};
+$('importbtn').onclick=()=>$('importfile').click();$('importfile').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());if(!Array.isArray(d.tasks))throw Error('Invalid');if(!confirm('Import this backup and replace current HomeCare data?'))return;tasks=d.tasks;equipment=Array.isArray(d.equipment)?d.equipment:[];prefs={...prefs,...(d.prefs||{})};theme=d.theme||theme;save();savePrefs();applyTheme();renderTasks();renderEquipment();$('remindersEnabled').checked=prefs.enabled;$('advanceDays').value=prefs.advanceDays;$('overdueEnabled').checked=prefs.overdue;$('quietEnabled').checked=prefs.quiet;$('reminderTime').value=prefs.time;alert('Backup restored.')}catch{alert('That file is not a valid HomeCare backup.')}e.target.value=''};
+load();applyTheme();$('remindersEnabled').checked=prefs.enabled;$('advanceDays').value=prefs.advanceDays;$('overdueEnabled').checked=prefs.overdue;$('quietEnabled').checked=prefs.quiet;$('reminderTime').value=prefs.time;renderTasks();renderEquipment();checkReminders();setInterval(checkReminders,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkReminders()});
 })();
 </script>
-</body>
-</html>
+</body></html>
